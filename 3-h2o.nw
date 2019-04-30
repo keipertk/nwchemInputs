@@ -1,0 +1,37 @@
+memory stack 800 mb heap 100 mb global 1000 mb
+
+geometry units angstroms
+O -1.4765014766 -0.6332885087 0.0898827346
+H -1.9838499390 -0.7470663319 -0.7281466521
+H -1.1474120728 0.2937933586 0.0499611499
+O 1.3009060824 -0.9725326095 0.1123300788
+H 1.6231813194 -1.4263451978 -0.6812347553
+H 0.3383752926 -1.1745452783 0.1460364674
+O 0.2066022512 1.5796259613 -0.1194070925
+H 0.8505520801 0.8353634930 -0.0913819530
+H 0.3749571446 2.0763034073 0.6962042911
+end
+
+basis
+  * library cc-pvdz
+end
+
+tce
+	ccsd
+	io ga
+	tilesize 10
+end
+
+# Set to 1/0::T/F to include corresponding precision in interative calculation
+# [BF16, FP16, FP32, FP64]
+set tce:t2_prec_path 0 0 0 1
+
+# Set to residual threshold (double precision) for increasing to next-higher precision
+# Note: Thresholds for precisions set to 0 in t2_prec_path are ignored
+# [BF16 Thresh, FP16 Thresh, FP32 Thresh]
+set tce:t2_prec_thresh 0.0 0.0 0.0
+
+# Optional: Set residual threshold for converged solution
+#set tce:thresh 1e-5
+
+task tce energy
